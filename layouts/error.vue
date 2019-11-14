@@ -13,9 +13,7 @@
       to="/"
       replace
     >
-      <el-button type="primary">
-        返回首页
-      </el-button>
+      返回首页
     </nuxt-link>
   </div>
 </template>

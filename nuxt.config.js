@@ -29,7 +29,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/element-ui'],
+  plugins: [],
   /*
    ** Nuxt.js dev-modules
    */
@@ -54,18 +54,11 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    babel: {
-      plugins: [
-        [
-          'component',
-          { libraryName: 'element-ui', styleLibraryName: 'theme-chalk' }
-        ]
-      ]
-    },
     // transpile: [/^element-ui/],
     analyze: {
       analyzerMode: 'static'
     },
+    extractCss: true,
     optimization: {
       splitChunks: {
         minSize: 10000,

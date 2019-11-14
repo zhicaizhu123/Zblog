@@ -10,9 +10,7 @@
       每一次记录，都是比其他人优秀最好的佐证
     </p>
     <nuxt-link to="/article">
-      <el-button size="large">
-        进入博客
-      </el-button>
+      进入博客
     </nuxt-link>
   </div>
 </template>
