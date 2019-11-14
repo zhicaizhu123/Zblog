@@ -58,7 +58,7 @@ module.exports = {
     analyze: {
       analyzerMode: 'static'
     },
-    extractCss: true,
+    extractCSS: { allChunks: true },
     optimization: {
       splitChunks: {
         minSize: 10000,
