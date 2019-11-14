@@ -25,7 +25,7 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: ['element-ui/lib/theme-chalk/index.css', '~/assets/scss/main.scss'],
+  css: ['~/assets/scss/main.scss'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -54,22 +54,22 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    transpile: [/^element-ui/],
+    babel: {
+      plugins: [
+        [
+          'component',
+          { libraryName: 'element-ui', styleLibraryName: 'theme-chalk' }
+        ]
+      ]
+    },
+    // transpile: [/^element-ui/],
     analyze: {
       analyzerMode: 'static'
     },
     optimization: {
       splitChunks: {
         minSize: 10000,
-        maxSize: 250000,
-        cacheGroups: {
-          elementui: {
-            test: /node_modules[\\/]element-ui/,
-            chunks: 'all',
-            priority: 20,
-            name: true
-          }
-        }
+        maxSize: 250000
       }
     },
     /*

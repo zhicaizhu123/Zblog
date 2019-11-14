@@ -1,5 +1,6 @@
-import Vue from 'vue'
-import Element from 'element-ui'
-import locale from 'element-ui/lib/locale/lang/en'
+import Vue from 'vue';
 
-Vue.use(Element, { locale })
+import { Button, Input } from 'element-ui';
+
+Vue.use(Button)
+Vue.use(Input)
