@@ -56,6 +56,7 @@ module.exports = {
     analyze: {
       analyzerMode: 'static'
     },
+    extractCSS: { allChunks: true },
     /*
      ** You can extend webpack config here
      */
