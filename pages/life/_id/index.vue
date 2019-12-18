@@ -1,17 +1,6 @@
 <template>
-  <div class="article-detail prevent-default">
+  <div>
     <h2>{{ data.title }}</h2>
-    <div
-      v-if="data.cover"
-      class="article-detail__cover"
-    >
-      <el-image
-        :src="data.cover"
-        style="width: 100%; height: 240px"
-        fit="contain"
-        :preview-src-list="[data.cover]"
-      />
-    </div>
     <div v-html="compiledMarkdown"/>
   </div>
 </template>
@@ -19,9 +8,8 @@
 <script>
 import marked from 'marked'
 import { to } from '@/utils'
-const rendererMD = new marked.Renderer()
 marked.setOptions({
-  renderer: rendererMD,
+  renderer: new marked.Renderer(),
   gfm: true,
   tables: true,
   breaks: false,
@@ -41,7 +29,7 @@ export default {
 
   computed: {
     compiledMarkdown () {
-      return marked(this.data.content || '', { sanitize: true })
+      return marked(this.data.content, { sanitize: true })
     }
   },
 
@@ -61,11 +49,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.article-detail {
-  background-color: #fff;
-  padding: 10px;
-  min-height: calc(100vh - 80px);
-}
-</style>

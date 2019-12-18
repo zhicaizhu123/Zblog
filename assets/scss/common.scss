@@ -1,35 +1,36 @@
 @import "mixin";
 
-body,
-div,
-span,
-header,
-footer,
-nav,
-section,
-aside,
-article,
-ul,
-dl,
-dt,
-dd,
-li,
-a,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-i,
-b,
-textarea,
-button,
-input,
-select,
-figure,
-figcaption {
+// body,
+// div,
+// span,
+// header,
+// footer,
+// nav,
+// section,
+// aside,
+// article,
+// ul,
+// dl,
+// dt,
+// dd,
+// li,
+// a,
+// p,
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+// i,
+// b,
+// textarea,
+// button,
+// input,
+// select,
+// figure,
+// figcaption
+.prevent-default {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -56,7 +57,7 @@ input[type="reset"] {
 input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px #f7fafc inset !important; //关于解决输入框背景颜色
+  box-shadow: 0 0 0px 1000px #f7fafc inset !important; //关于解决输入框背景颜色
   -webkit-text-fill-color: #333 !important; //关于接输入框文字颜色
 }
 
@@ -68,25 +69,29 @@ html,
 body {
   height: 100%;
   width: 100%;
-  background: #F3F3F3;
+  background: #f3f3f3;
   color: #333;
 }
 
 #app {
-  color: #333
+  color: #333;
 }
 
 body {
-  background: #f4f5f5;
+  background: #f0f0f0;
   color: #333;
-  font: 14px/20px "Microsoft Yahei", 'Hiragino Sans GB', arial, '\5b8b\4f53', sans-serif;
+  font-family: Helvetica, "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑",
+    Arial, sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 a {
   color: #444;
   outline: none;
-  transition: all .15s;
-  opacity: .8;
+  transition: all 0.15s;
+  opacity: 0.8;
+  text-decoration: none;
 
   &:hover {
     opacity: 1;
@@ -144,4 +149,28 @@ a {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.highlight-label {
+  padding: 6px 6px 6px 14px;
+  position: relative;
+  font-size: 16px;
+  color: #333;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -8px;
+    width: 4px;
+    height: 16px;
+    background-color: #409eff;
+    border-radius: 999px;
+  }
+}
+
+.color-primary {
+  color: #409eff;
 }

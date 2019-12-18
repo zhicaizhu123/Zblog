@@ -1,4 +1,4 @@
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = {
   mode: 'universal',
@@ -25,11 +25,16 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: ['~/assets/scss/main.scss'],
+  css: ['~/assets/scss/main.scss', 'element-ui/lib/theme-chalk/index.css'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/axios', ssr: false },
+    { src: '~/plugins/prototype', ssr: false },
+    { src: '~/plugins/element-ui', ssr: true },
+    { src: '~/plugins/vue-mavon-editor', srr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -42,11 +47,13 @@ module.exports = {
    */
   modules: ['@nuxtjs/axios'],
   axios: {
+    prefix: 'http://localhost:9004/',
     proxy: true
   },
   proxy: {
     '/api': {
-      target: 'http://www.zzccoder.cn',
+      target: 'http://localhost:9004/',
+      changeOrigin: true, // 是否跨域
       pathRewrite: { '^/api': '' }
     }
   },
@@ -58,20 +65,40 @@ module.exports = {
     analyze: {
       analyzerMode: 'static'
     },
-    extractCSS: { allChunks: true },
+    // extractCSS: { allChunks: true },
     optimization: {
       splitChunks: {
         minSize: 10000,
         maxSize: 250000
       }
     },
+    babel: {
+      // 配置按需引入规则
+      plugins: [
+        [
+          'component',
+          {
+            libraryName: 'element-ui',
+            styleLibraryName: 'theme-chalk'
+          }
+        ]
+      ]
+    },
     /*
      ** You can extend webpack config here
      */
     extend (config, ctx) {
-      config.plugins.unshift(new LodashModuleReplacementPlugin())
+      if (ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        });
+      }
+      config.plugins.unshift(new LodashModuleReplacementPlugin());
       // rules[2].use[0] is babel-loader
-      config.module.rules[2].use[0].options.plugins = ['lodash']
+      config.module.rules[2].use[0].options.plugins = ['lodash'];
     }
   },
 
@@ -79,4 +106,4 @@ module.exports = {
     port: 9005, // default: 3000
     host: '0.0.0.0' // default: localhost,
   }
-}
+};

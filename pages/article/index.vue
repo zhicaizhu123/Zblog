@@ -1,120 +1,116 @@
 <template>
   <div class="article-container">
-    <ul>
-      <li
+    <aside
+      v-loading="loading.article"
+      class="left-types"
+    >
+      <box-item title="文章分类">
+        <types
+          type="article"
+          :list="articleTypes"
+          @update="changeType"
+        />
+      </box-item>
+    </aside>
+    <section
+      v-loading="loading.article"
+      class="right-main"
+    >
+      <article-item
         v-for="item in list"
-        :key="item.id"
-        class="article-item pointer"
-        @click="navTo(item.id)"
-      >
-        <div class="article-item__main">
-          <h3 class="title line-clamp-1">
-            <nuxt-link
-              :to="`/article/${item.id}`"
-              target="_blank"
-            >
-              {{ item.title || '暂无标题' }}
-            </nuxt-link>
-          </h3>
-          <p class="desc line-clamp-2">
-            {{ item.desc || '暂无简介' }}
-          </p>
-          <div class="other">
-            <span class="create-time">{{ item.time }}</span>
-          </div>
-        </div>
-        <div class="article-item__cover">
-          <img
-            :src="item.cover"
-            alt="图片"
-          >
-        </div>
-      </li>
-    </ul>
+        :key="item._id"
+        :data="item"
+        type="article"
+      />
+    </section>
   </div>
 </template>
 
 <script>
-import Mock from 'mockjs'
-
-const createList = () => {
-  return Mock.mock({
-    'list|20': [
-      {
-        id: '@integer(1,99999)',
-        title: '@ctitle()',
-        desc: '@cparagraph()',
-        time: '@date("yyyy-MM-dd")',
-        cover: '@image(60x60)'
-      }
-    ]
-  })
-}
+import Types from '@/components/Types'
+import BoxItem from '@/components/BoxItem'
+import ArticleItem from '@/components/Article/Item'
 
 export default {
+  components: {
+    Types,
+    BoxItem,
+    ArticleItem
+  },
+
   data () {
     return {
-      list: createList().list
+      type: '',
+      list: [],
+      articleTypes: [],
+      page: {
+        index: 1,
+        size: 10,
+        cont: 0,
+        total: 0
+      },
+      loading: {
+        article: false,
+        type: false
+      }
     }
   },
 
-  created () {},
+  created () {
+    this.getArticleList()
+    this.getArticleTypes()
+  },
 
   methods: {
-    navTo (id) {
-      window.open(`/article/${id}`, '_blank')
+    async getArticleList () {
+      const { index, size } = this.page
+      this.loading.article = true
+      const [err, res] = await this.$to(
+        this.$axios.$get('/api/articles', {
+          type: this.type,
+          pageIndex: index,
+          pageSize: size
+        })
+      )
+      this.loading.article = false
+      if (!err) {
+        this.list = res.data.list
+      }
+    },
+
+    async getArticleTypes () {
+      this.loading.type = true
+      const [err, res] = await this.$to(
+        this.$axios.$get('/api/dictionary/article')
+      )
+      this.loading.type = false
+      if (!err) {
+        this.articleTypes = res.data
+      }
+    },
+
+    changeType (id) {
+      this.page = { ...this.page, index: 1, size: 10 }
+      this.type = id
+      this.getArticleList()
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .article-container {
-  max-width: 700px;
-  margin: 10px auto;
-  background-color: #fff;
-  .article-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 20px;
-    transition: all 0.15s;
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.01);
-    }
-    &:not(:last-child) {
-      border-bottom: 1px solid rgba(178, 186, 194, 0.15);
-    }
-    &__main {
-      .title {
-        font-size: 18px;
-        line-height: 24px;
-        &-link {
-          &:visited {
-            color: #909090;
-          }
-        }
-      }
-      .desc {
-        margin-top: 10px;
-        line-height: 24px;
-      }
-      .other {
-        margin-top: 10px;
-      }
-      .create-time {
-        color: #999;
-        font-size: 12px;
-      }
-    }
-    &__cover {
-      margin-left: 20px;
-      img {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-      }
-    }
+  display: flex;
+  min-height: calc(100vh - 80px);
+  .left-types {
+    background-color: #fff;
+    width: 300px;
+    flex: 0 0 300px;
+    margin-right: 10px;
+  }
+  .right-main {
+    background-color: #fff;
+    flex: 1;
   }
 }
 </style>

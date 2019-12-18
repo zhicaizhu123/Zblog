@@ -1,18 +1,12 @@
 <template>
   <div class="not-found">
     <p class="status">
-      <img
-        src="~assets/images/icon-404.png"
-        alt=""
-      >
+      <img src="~assets/images/icon-404.png" alt="">
     </p>
     <div class="desc">
       很遗憾，您访问的页面挖不到了...
     </div>
-    <nuxt-link
-      to="/"
-      replace
-    >
+    <nuxt-link to="/" replace>
       返回首页
     </nuxt-link>
   </div>
@@ -21,7 +15,7 @@
 <script>
 export default {
   layout: 'blank'
-}
+};
 </script>
 
 <style lang="scss">

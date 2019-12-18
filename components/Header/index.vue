@@ -1,20 +1,20 @@
 <template>
   <header class="header-container">
-    <Logo />
-    <right-list />
+    <Logo/>
+    <right-list/>
   </header>
 </template>
 
 <script>
-import Logo from './components/Logo'
-import RightList from './components/RightList'
+import Logo from './components/Logo';
+import RightList from './components/RightList';
 
 export default {
   components: {
     Logo,
     RightList
   }
-}
+};
 </script>
 
 <style lang="scss">

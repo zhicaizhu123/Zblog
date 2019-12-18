@@ -1,5 +1,5 @@
 <template>
   <div>
-    category
+    user article
   </div>
 </template>

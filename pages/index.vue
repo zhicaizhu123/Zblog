@@ -1,30 +1,27 @@
 <template>
   <div class="index-container">
     <div>
-      <img
-        src="~assets/images/banner.png"
-        alt=""
-      >
+      <img src="~assets/images/banner.png" alt="">
     </div>
-    <p class="index-desc">
+    <div class="index-desc">
       每一次记录，都是比其他人优秀最好的佐证
-    </p>
+    </div>
     <nuxt-link to="/article">
-      进入博客
+      <el-button type="primary">
+        进入博客列表
+      </el-button>
     </nuxt-link>
   </div>
 </template>
 
 <script>
 export default {
-  asyncData (context) {},
-
   head () {
     return {
       title: 'ZCoder'
-    }
+    };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
