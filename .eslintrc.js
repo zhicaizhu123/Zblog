@@ -28,6 +28,7 @@ module.exports = {
         endTag: "never",
         selfClosingTag: "never"
       }
-    ]
+    ],
+    "space-before-function-paren": 0
   }
 };
