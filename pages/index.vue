@@ -7,7 +7,7 @@
       >
     </div>
     <div class="index-desc">
-      ZCoder帮您记录学习轨迹
+      z-blog， 记录您的学习轨迹 ：)
     </div>
     <nuxt-link to="/article">
       <el-button type="primary">
