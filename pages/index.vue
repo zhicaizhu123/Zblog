@@ -34,7 +34,6 @@ export default {
   align-items: center;
   flex-direction: column;
   padding: 40px 20px;
-  height: 100vh;
   img {
     max-width: 100%;
     height: auto;
