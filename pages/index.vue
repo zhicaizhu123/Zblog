@@ -7,7 +7,7 @@
       >
     </div>
     <div class="index-desc">
-      每一次记录，都是比别人优秀最好的证明
+      记录您的学习足迹
     </div>
     <nuxt-link to="/article">
       <el-button type="primary">
