@@ -1,10 +1,13 @@
 <template>
   <div class="index-container">
     <div>
-      <img src="~assets/images/banner.png" alt="">
+      <img
+        src="~assets/images/banner.png"
+        alt=""
+      >
     </div>
     <div class="index-desc">
-      每一次记录，都是比其他人优秀最好的佐证
+      每一次记录，都是比别人优秀最好的证明
     </div>
     <nuxt-link to="/article">
       <el-button type="primary">
@@ -16,12 +19,12 @@
 
 <script>
 export default {
-  head () {
+  head() {
     return {
       title: 'ZCoder'
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
