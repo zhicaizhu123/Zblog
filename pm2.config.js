@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "deju-pc-ssr", // 项目名称
+      name: "zblog-ssr", // 项目名称
       cwd: "./", // 当前工作路径
       script: "npm", // 实际启动脚本
       args: "run start", // 参数
